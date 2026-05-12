@@ -35,10 +35,12 @@ axiomLink.onclick = () => {
   let url;
   if (terminal === 'padre') {
     url = `https://trade.padre.gg/trade/solana/${poolAddress}`;
+  } else if (terminal === 'gmgn') {
+    url = `https://gmgn.ai/sol/token/${mintAddress}`;
   } else {
     url = `https://axiom.trade/meme/${poolAddress}?chain=sol`;
   }
-  
+
   if (window.__TAURI__) {
     // Try both possible Tauri 2.0 shell locations
     const shell = window.__TAURI__.shell || window.__TAURI__.opener;
@@ -198,7 +200,7 @@ function showTradePopup(type, amount) {
   popup.innerText = (type === 'up' ? '+' : '-') + '$' + (amount < 1 ? amount.toFixed(2) : Math.floor(amount).toLocaleString());
 
   // Random horizontal offset to prevent overlapping (converted to rem)
-  const offsetRem = (Math.random() - 0.5) * 2.5; 
+  const offsetRem = (Math.random() - 0.5) * 2.5;
   popup.style.right = (2.5 + offsetRem) + 'rem';
   //lets also rotate it a little
   popup.style.transform = `rotate(${(Math.random() - 0.5) * 30}deg)`;
