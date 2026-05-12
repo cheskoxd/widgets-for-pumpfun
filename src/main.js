@@ -3,6 +3,8 @@ const { invoke } = window.__TAURI__.core;
 
 const poolInput = document.getElementById("pool-address");
 const addButton = document.getElementById("add-widget");
+const walletInput = document.getElementById("wallet-address");
+const pullButton = document.getElementById("pull-wallet");
 const widgetList = document.getElementById("widget-list");
 
 // Track widgets with metadata
@@ -13,6 +15,7 @@ const spawningLabels = new Set();
 
 async function spawnWidget(widgetData) {
   const { poolAddress, symbol, image, mcap, mint } = widgetData;
+  if (!poolAddress) return;
   const label = `widget_${poolAddress.replace(/[^a-zA-Z0-9]/g, '')}`;
 
   if (spawningLabels.has(label)) return;
@@ -56,15 +59,11 @@ async function spawnWidget(widgetData) {
   }
 }
 
-async function addWidget() {
-  const mintOrPool = poolInput.value.trim();
-  if (!mintOrPool) return;
-
-  addButton.disabled = true;
-  addButton.innerText = "Loading...";
+async function addWidgetByMint(mint, silent = false) {
+  if (!mint) return;
 
   try {
-    const data = await invoke("fetch_token_metadata", { mint: mintOrPool });
+    const data = await invoke("fetch_token_metadata", { mint });
     const widgetData = {
       mint: data.baseToken,
       poolAddress: data.poolAddress,
@@ -82,11 +81,65 @@ async function addWidget() {
     }
   } catch (err) {
     console.error("Failed to add widget:", err);
-    alert("Error: " + err);
+    if (!silent) alert("Error: " + err);
+  }
+}
+
+async function addWidget() {
+  const mintOrPool = poolInput.value.trim();
+  if (!mintOrPool) return;
+
+  addButton.disabled = true;
+  addButton.innerText = "Loading...";
+
+  await addWidgetByMint(mintOrPool);
+
+  addButton.disabled = false;
+  addButton.innerText = "Add Widget";
+  poolInput.value = "";
+}
+
+async function pullWallet() {
+  const wallet = walletInput.value.trim();
+
+  if (!wallet) {
+    alert("Please enter both Wallet Address and Helius API Key");
+    return;
+  }
+
+  pullButton.disabled = true;
+  pullButton.innerText = "Pulling...";
+
+  try {
+    const response = await fetch(`https://api.helius.xyz/v1/wallet/${wallet}/balances?api-key=0041091d-9a4e-43c9-a025-617a1de37ae4`);
+    if (!response.ok) throw new Error("Helius API error: " + response.statusText);
+
+    const data = await response.json();
+    const balances = data.balances || [];
+
+    // Sort by USD value descending
+    const sorted = balances.sort((a, b) => (b.usdValue || 0) - (a.usdValue || 0));
+
+    // Take top 5 non-SOL tokens with non-zero balance
+    const topTokens = sorted
+      .filter(t => t.balance > 0.1 && t.mint !== "So11111111111111111111111111111111111111112")
+      .slice(0, 10);
+
+    if (topTokens.length === 0) {
+      alert("No tokens with balance found in this wallet.");
+      return;
+    }
+
+    for (const token of topTokens) {
+      await addWidgetByMint(token.mint, true);
+    }
+
+  } catch (err) {
+    console.error("Failed to pull wallet:", err);
+    alert("Error: " + err.message);
   } finally {
-    addButton.disabled = false;
-    addButton.innerText = "Add Widget";
-    poolInput.value = "";
+    pullButton.disabled = false;
+    pullButton.innerText = "Pull Wallet";
   }
 }
 
@@ -127,7 +180,7 @@ function renderList() {
 // Only refresh metadata on start, don't auto-spawn
 async function initSavedWidgets() {
   const refreshedWidgets = [];
-  
+
   for (const widget of activeWidgets) {
     try {
       console.log("Refreshing metadata for:", widget.symbol);
@@ -166,6 +219,10 @@ terminalRadios.forEach(radio => {
 
 addButton.onclick = addWidget;
 poolInput.onkeypress = (e) => { if (e.key === "Enter") addWidget(); };
+
+pullButton.onclick = pullWallet;
+walletInput.onkeypress = (e) => { if (e.key === "Enter") pullWallet(); };
+
 
 renderList();
 initSavedWidgets();
