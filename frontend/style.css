@@ -1,0 +1,433 @@
+:root {
+    --bg: #000000;
+    --card-bg: rgba(20, 20, 20, 0.8);
+    --primary: #ffffff;
+    --text: #ffffff;
+    --text-dim: #94a3b8;
+    --border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Falling Pattern Background */
+.background-pattern-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.falling-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2; /* Lowered opacity for white pattern */
+    background-image: 
+        radial-gradient(4px 100px at 0px 235px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 235px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 117.5px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 252px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 252px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 126px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 150px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 150px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 75px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 253px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 253px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 126.5px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 204px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 204px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 102px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 134px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 134px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 67px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 179px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 179px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 89.5px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 299px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 299px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 149.5px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 215px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 215px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 107.5px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 281px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 281px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 140.5px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 158px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 158px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 79px, var(--primary) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0px 210px, var(--primary), transparent),
+        radial-gradient(4px 100px at 300px 210px, var(--primary), transparent),
+        radial-gradient(1.5px 1.5px at 150px 105px, var(--primary) 100%, transparent 150%);
+    background-size: 
+        300px 235px, 300px 235px, 300px 235px, 300px 252px, 300px 252px, 300px 252px,
+        300px 150px, 300px 150px, 300px 150px, 300px 253px, 300px 253px, 300px 253px,
+        300px 204px, 300px 204px, 300px 204px, 300px 134px, 300px 134px, 300px 134px,
+        300px 179px, 300px 179px, 300px 179px, 300px 299px, 300px 299px, 300px 299px,
+        300px 215px, 300px 215px, 300px 215px, 300px 281px, 300px 281px, 300px 281px,
+        300px 158px, 300px 158px, 300px 158px, 300px 210px, 300px 210px, 300px 210px;
+    animation: falling-animation 150s linear infinite;
+}
+
+@keyframes falling-animation {
+    from {
+        background-position: 
+            0px 220px, 3px 220px, 151.5px 337.5px, 25px 24px, 28px 24px, 176.5px 150px, 
+            50px 16px, 53px 16px, 201.5px 91px, 75px 224px, 78px 224px, 226.5px 230.5px, 
+            100px 19px, 103px 19px, 251.5px 121px, 125px 120px, 128px 120px, 276.5px 187px, 
+            150px 31px, 153px 31px, 301.5px 120.5px, 175px 235px, 178px 235px, 326.5px 384.5px, 
+            200px 121px, 203px 121px, 351.5px 228.5px, 225px 224px, 228px 224px, 376.5px 364.5px, 
+            250px 26px, 253px 26px, 401.5px 105px, 275px 75px, 278px 75px, 426.5px 180px;
+    }
+    to {
+        background-position: 
+            0px 6800px, 3px 6800px, 151.5px 6917.5px, 25px 13632px, 28px 13632px, 176.5px 13758px, 
+            50px 5416px, 53px 5416px, 201.5px 5491px, 75px 17175px, 78px 17175px, 226.5px 17301.5px, 
+            100px 5119px, 103px 5119px, 251.5px 5221px, 125px 8428px, 128px 8428px, 276.5px 8495px, 
+            150px 9876px, 153px 9876px, 301.5px 9965.5px, 175px 13391px, 178px 13391px, 326.5px 13540.5px, 
+            200px 14741px, 203px 14741px, 351.5px 14848.5px, 225px 18770px, 228px 18770px, 376.5px 18910.5px, 
+            250px 5082px, 253px 5082px, 401.5px 5161px, 275px 6375px, 278px 6375px, 426.5px 6480px;
+    }
+}
+
+.pattern-overlay {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(1.5rem);
+    background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, #000 2px);
+    background-size: 8px 8px;
+    mask-image: radial-gradient(ellipse at center, transparent, #000);
+    -webkit-mask-image: radial-gradient(ellipse at center, transparent, #000);
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 10%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+}
+
+.nav-logo {
+    width: 28px;
+    height: 28px;
+}
+
+.github-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text);
+    background: var(--card-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.github-btn:hover {
+    border-color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* Hero Section */
+.hero {
+    padding: 10rem 10% 6rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.highlight {
+    color: var(--primary);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.hero p {
+    color: var(--text-dim);
+    max-width: 800px;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.hero-intro {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem !important;
+}
+
+.hero-pitch {
+    font-size: 1.1rem;
+}
+
+.cta-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: #000; /* Black text on white button */
+    background: var(--primary);
+    padding: 1.2rem 2.5rem;
+    border-radius: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    transition: all 0.2s;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+}
+
+.version {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Showcase / Interactive Demo */
+.showcase {
+    padding: 6rem 10%;
+}
+
+.showcase-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.showcase-header h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.desktop-preview {
+    width: 100%;
+    height: 600px;
+    background: #050505;
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Dummy Widgets */
+.dummy-widget {
+    position: absolute;
+    background: rgba(15, 15, 15, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    cursor: move;
+    user-select: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: border-color 0.2s;
+}
+
+.dummy-widget:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.widget-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.w-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.w-logo {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.w-symbol {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-dim);
+}
+
+.w-price {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.w-mcap {
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.widget-lg { width: 280px; height: auto; }
+.widget-md { width: 220px; height: auto; }
+.widget-sm { width: 160px; height: auto; }
+
+/* Resizer handle */
+.resizer {
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,0.1);
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    cursor: nwse-resize;
+    border-radius: 2px;
+}
+
+/* Video Section */
+.video-section {
+    padding: 6rem 10%;
+    text-align: center;
+}
+
+.video-container {
+    max-width: 1000px;
+    margin: 3rem auto 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.video-placeholder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.play-btn {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Open Source */
+.opensource {
+    padding: 6rem 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.os-card {
+    background: linear-gradient(145deg, #111, #000);
+    border: 1px solid var(--border);
+    padding: 4rem;
+    border-radius: 2rem;
+    text-align: center;
+    max-width: 800px;
+}
+
+.os-card h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.os-card p {
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+}
+
+.github-link {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+footer {
+    padding: 4rem 10%;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/tabs.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      min-width: unset;
+      min-height: unset;
+      height: 100vh;
+      width: 100vw;
+      background: transparent;
+    }
+
+    .widget-container {
+      border-radius: 1rem;
+    }
+
+    /* Custom scrollbar-less look */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="widget-container" data-tauri-drag-region>
+    <div id="close-widget" class="close-btn">&times;</div>
+    <div id="axiom-link" class="axiom-icon" title="Open in Axiom">
+      <svg viewBox="0 0 24 24" width="16" height="16">
+        <path d="M12 2L2 22h20L12 2z" fill="currentColor" />
+      </svg>
+    </div>
+    <img id="bg-logo" src="" class="bg-logo" data-tauri-drag-region />
+    <div class="header" data-tauri-drag-region>
+      <div class="token-info" data-tauri-drag-region>
+        <img id="logo" src="" style="width:1.5rem; height:1.5rem; border-radius:50%;" data-tauri-drag-region />
+        <span class="token-symbol" id="symbol">...</span>
+      </div>
+      <div class="price-section" data-tauri-drag-region>
+        <div class="mcap-display" id="mcap">$0</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="widget.js"></script>
+</body>
+
+</html>

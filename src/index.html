@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WidgetsForPumpfun by Cheskodev</title>
+  <link rel="icon" type="image/svg+xml" href="assets/tabs.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="dashboard">
+  <div class="dashboard-container">
+    <h1>WidgetsForPumpfun</h1>
+    <p>Enter a Solana token address to spawn a desktop widget.</p>
+
+    <div class="input-group">
+      <input type="text" id="pool-address" placeholder="Mint Address..." />
+      <button id="add-widget">Add Widget</button>
+    </div>
+
+    <div class="settings-row">
+      <span class="settings-label">Terminal:</span>
+      <div class="terminal-toggle">
+        <label class="toggle-option">
+          <input type="radio" name="terminal" value="axiom" checked />
+          <span>Axiom</span>
+        </label>
+        <label class="toggle-option">
+          <input type="radio" name="terminal" value="padre" />
+          <span>Padre</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="active-title">Tracked Tokens</div>
+    <div class="widget-list" id="widget-list"></div>
+
+    <footer>
+      Created by <a href="#" id="x-link">Cheskodev</a>
+    </footer>
+  </div>
+
+  <script type="module" src="main.js"></script>
+  <script>
+    // Using global Tauri if available
+    document.getElementById('x-link').onclick = (e) => {
+      e.preventDefault();
+      const opener = window.__TAURI__.opener || window.__TAURI__.shell;
+      if (opener && opener.openUrl) {
+        opener.openUrl('https://x.com/cheskodev');
+      } else {
+        window.open('https://x.com/cheskodev', '_blank');
+      }
+    };
+  </script>
+</body>
+
+</html>
