@@ -4,7 +4,7 @@
 
 WidgetsForPumpfun is a high-performance, minimalist desktop application built for Solana trenchers. Track any coin's market cap in real-time and see live trades animated directly on your desktop, all without ever switching tabs or checking charts every 5 seconds.
 
-![Banner](https://raw.githubusercontent.com/cheskoxd/widgets-for-pumpfun/main/frontend/preview_placeholder.webp)
+https://raw.githubusercontent.com/cheskoxd/widgets-for-pumpfun/main/frontend/demo.mp4
 
 ## ✨ Features
 
